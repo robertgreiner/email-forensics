@@ -7,6 +7,26 @@
 
 ---
 
+**We believe Standard Supply systems are at risk.** We have conducted a thorough forensic investigation and the evidence does not support the conclusions in Standard Supply's initial assessment. We are sharing this report because we have information your team has not yet seen - including 21 fraudulent emails and their complete headers - and your other customers may be at risk.
+
+---
+
+## Executive Summary
+
+- **Background:** Attacker impersonated Janet Halstead-Wiggins to redirect >$200K in payments; attack identified before funds lost but attacker remains active as of today
+- **What Happened:** Two lookalike domains used (ssdhvca.com, sshdvac.com); 21 fraudulent emails over 11 days; attacker switched from Microsoft 365 to Google Workspace after detection
+- **Our Investigation:** Analyzed 208 emails with complete headers; tested 5 hypotheses; ruled out Reply-To poisoning, man-in-the-middle, and social engineering
+- **Key Finding:** Attacker knew internal Message-IDs only visible in Janet's inbox, enabling them to thread into legitimate conversations
+- **Why This Points to Standard Supply:** The lookalike domain proves attacker couldn't read Moss mailboxes; if they could, no fake domain would be needed
+- **Status of Moss Systems:** No evidence of compromise found; investigation ongoing; engaged third-party security provider
+- **Spam Attack on Janet:** Janet was spam-bombed after fraud discovered - consistent with attacker covering tracks in her mailbox
+- **Attacker Infrastructure:** Well-resourced; operates M365 tenant and Google Workspace; adapts quickly when detected
+- **Risk to Other Customers:** If Janet's mailbox is compromised, attacker can see all her correspondence with all customers
+- **Recommended Actions:** Investigate Janet's inbox rules, audit logs, sign-in history, and third-party app access
+- **What We're Asking:** Acknowledge ongoing threat, investigate thoroughly, consider notifying other customers, share findings
+
+---
+
 ## Background
 
 Between December 4-17, 2025, Moss Mechanical received fraudulent emails impersonating Janet Halstead-Wiggins, Senior Credit Manager at Standard Supply. The attacker used lookalike domains designed to appear as Standard Supply and attempted to redirect payments exceeding $200,000 to fraudulent bank accounts.
