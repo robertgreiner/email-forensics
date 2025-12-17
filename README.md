@@ -6,10 +6,38 @@ A collection of Python scripts for investigating Business Email Compromise (BEC)
 
 This toolkit was developed to investigate a BEC attack where an attacker:
 1. Registered a lookalike domain (ssdhvca.com vs legitimate ssdhvac.com)
-2. Inserted themselves into an existing email thread
-3. Impersonated a vendor to redirect payments
+2. Compromised the vendor's email (read access) to obtain Message-IDs
+3. Inserted themselves into an existing email thread
+4. Impersonated a vendor to redirect payments
 
 The scripts analyze email headers to determine the attack vector and identify whether the compromise originated from the victim's side or the vendor's side.
+
+## Directory Structure
+
+```
+email-forensics/
+├── src/                    # Source code
+│   ├── export_all_emails.py       # Complete email export (headers + body)
+│   ├── comprehensive_review.py    # 30-day review with anomaly detection
+│   ├── analyze_thread_flow.py     # Thread flow analysis
+│   ├── analyze_sent.py            # Sent folder analysis
+│   ├── analyze_madelin.py         # Secondary user analysis
+│   ├── get_email_headers.py       # Header extraction script
+│   └── parse_eml.py               # EML file parser
+│
+├── output/                 # Program output (raw data)
+│   ├── all_emails_complete_export.txt  # Full export with TRASH (3.3MB, 208 emails)
+│   ├── comprehensive_review_output.txt # Anomaly detection results
+│   └── email_headers_*.txt             # Individual header dumps
+│
+├── reports/                # Reports for sharing
+│   └── findings.md         # Complete forensic investigation report
+│
+├── venv/                   # Python virtual environment
+├── README.md               # This file
+├── requirements.txt        # Python dependencies
+└── .env                    # Configuration (not in git)
+```
 
 ## Prerequisites
 
@@ -68,79 +96,79 @@ gcloud auth application-default login --impersonate-service-account=SERVICE_ACCO
 
 ## Scripts
 
-### get_email_headers.py
+### export_all_emails.py (Primary Export Tool)
 
-Retrieves and analyzes email headers for a specific user, searching for emails from specified domains.
-
-**Configuration:** Edit the script to set:
-- `SERVICE_ACCOUNT_EMAIL` - Your service account email
-- `DELEGATED_USER` - The user's mailbox to access
-- `SCOPES` - Gmail API scopes
+Exports ALL emails with full headers and body content, including INBOX, SENT, TRASH, and SPAM.
 
 **Usage:**
 ```bash
-python get_email_headers.py
+cd src
+python export_all_emails.py
 ```
+
+**Output:** `output/all_emails_complete_export.txt`
+
+**Features:**
+- Exports from multiple user mailboxes
+- Includes ALL locations (INBOX, SENT, TRASH, SPAM, ARCHIVE)
+- Full RFC 2822 headers
+- Email body (text and HTML)
+- Attachment listing
+- Classification (LEGITIMATE vs FRAUDULENT)
+- Location tracking for each email
 
 ### comprehensive_review.py
 
-Performs a comprehensive 30-day review of all emails from/to specified domains across multiple users. Checks for:
+Performs anomaly detection across all emails from specified domains.
+
+**Checks for:**
 - Reply-To header poisoning
 - DKIM domain mismatches
-- Anomalous email patterns
-
-**Configuration:** Edit the script to set:
-- `SERVICE_ACCOUNT_EMAIL` - Your service account email
-- `USERS_TO_SCAN` - List of user emails to analyze
-- `LEGITIMATE_DOMAIN` - The real vendor domain
-- `FRAUDULENT_DOMAIN` - The lookalike/attacker domain
+- Suspicious patterns
 
 **Usage:**
 ```bash
-python comprehensive_review.py
+python src/comprehensive_review.py
 ```
 
-**Output:**
-- Summary of emails analyzed
-- Anomaly detection results
-- Reply-To header analysis
-- Detailed email inventory
-- Final verdict on compromise
+### analyze_thread_flow.py
 
-### analyze_sent.py
-
-Analyzes a user's sent folder to determine if they sent emails to the fraudulent domain (indicating they were fooled by the attack).
+Analyzes email threading to determine who initiated contact and trace the conversation flow.
 
 **Usage:**
 ```bash
-python analyze_sent.py
+python src/analyze_thread_flow.py
 ```
-
-### analyze_madelin.py
-
-Analyzes a secondary user's mailbox (useful for checking if multiple employees were targeted).
-
-**Usage:**
-```bash
-python analyze_madelin.py
-```
-
-## Output Files
-
-- `findings.md` - Comprehensive forensic investigation report
-- `comprehensive_review_output.txt` - Raw output from comprehensive review
-- `email_headers_*.txt` - Individual email header dumps
 
 ## Key Findings from This Investigation
 
-The toolkit helped determine:
+| Metric | Count |
+|--------|-------|
+| Total emails exported | 208 |
+| From ssdhvac.com (legitimate) | 77 |
+| From ssdhvca.com (FRAUDULENT) | 27 |
+| Emails in TRASH | 40 |
+| Emails with Reply-To header | 0 |
 
-1. **No Reply-To Poisoning** - All 63+ legitimate emails had no Reply-To header
+### Conclusions
+
+1. **No Reply-To Poisoning** - All 77 legitimate emails had NO Reply-To header
 2. **Attack Vector Identified** - Lookalike domain + external M365 tenant (warehouseathletics.onmicrosoft.com)
 3. **Compromise Location** - Standard Supply (vendor) had read-access compromise, NOT the victim organization
 4. **Evidence** - Attacker knew Message-IDs from victim's emails, only possible if they could read vendor's inbox
+5. **13 fraudulent emails were in TRASH** - Discovered after victim identified the fraud
 
 ## Investigation Methodology
+
+### Hypotheses Tested
+
+| # | Hypothesis | Verdict |
+|---|------------|---------|
+| 1 | Reply-To Poisoning | ❌ REFUTED |
+| 2 | Moss (Victim) Compromise | ❌ REFUTED |
+| 3 | Standard Supply Read-Access Compromise | ✅ CONFIRMED |
+| 4 | Man-in-the-Middle | ❌ UNLIKELY |
+| 5 | Social Engineering Only | ❌ RULED OUT |
 
 ### Headers Analyzed
 
@@ -155,13 +183,14 @@ The toolkit helped determine:
 | `X-OriginatorOrg` | M365 organization identifier |
 | `X-MS-Exchange-CrossTenant-id` | M365 tenant UUID |
 
-### Hypotheses Tested
+## Attacker Infrastructure
 
-1. **Reply-To Poisoning** - ❌ Refuted (no Reply-To headers found)
-2. **Victim Compromise** - ❌ Refuted (attack required external infrastructure)
-3. **Vendor Read-Access Compromise** - ✅ Confirmed (attacker knew victim's Message-IDs)
-4. **Man-in-the-Middle** - ❌ Unlikely (TLS verified, no interception evidence)
-5. **Social Engineering Only** - ❌ Ruled out (too precise, knew internal Message-IDs)
+| Attribute | Value |
+|-----------|-------|
+| Fraudulent Domain | ssdhvca.com |
+| M365 Tenant | warehouseathletics.onmicrosoft.com |
+| Tenant ID | 4b0f3443-6891-4079-a2a5-de733068808c |
+| Mail Server | BYAPR13MB2743.namprd13.prod.outlook.com |
 
 ## Security Considerations
 
@@ -170,15 +199,17 @@ The toolkit helped determine:
 - Audit logs are generated for all API access
 - Consider data handling policies when analyzing email content
 
+## Reports
+
+The main forensic report is located at `reports/findings.md` and includes:
+- Executive summary
+- Investigation methodology
+- Hypotheses tested with evidence
+- Complete email inventories
+- Attack timeline
+- Counter-arguments addressed
+- Investigation guide for the vendor
+
 ## License
 
 Internal use only. Contains investigation-specific configurations.
-
-## Contributing
-
-This toolkit was developed for a specific investigation. To adapt for other investigations:
-
-1. Update domain names in scripts
-2. Update user email lists
-3. Modify search queries as needed
-4. Adjust date ranges for relevant timeframe
