@@ -26,9 +26,8 @@ email-forensics/
 │   └── parse_eml.py               # EML file parser
 │
 ├── output/                 # Program output (raw data)
-│   ├── all_emails_complete_export.txt  # Full export with TRASH (3.3MB, 208 emails)
-│   ├── comprehensive_review_output.txt # Anomaly detection results
-│   └── email_headers_*.txt             # Individual header dumps
+│   ├── all_emails_complete_export.txt  # Full export (3.3MB, 208 emails)
+│   └── comprehensive_review_output.txt # Anomaly detection results
 │
 ├── reports/                # Reports for sharing
 │   └── findings.md         # Complete forensic investigation report
@@ -146,9 +145,16 @@ python src/analyze_thread_flow.py
 |--------|-------|
 | Total emails exported | 208 |
 | From ssdhvac.com (legitimate) | 77 |
-| From ssdhvca.com (FRAUDULENT) | 27 |
+| From ssdhvca.com (FRAUDULENT) | 21 unique |
 | Emails in TRASH | 40 |
 | Emails with Reply-To header | 0 |
+
+### Data Completeness Verification
+
+Fraudulent email capture was **verified against Google Workspace Admin Email Log Search**:
+- Admin log search: 21 unique Message-IDs from ssdhvca.com
+- Our export: 21 unique Message-IDs from ssdhvca.com
+- **Result: 100% MATCH** - Every fraudulent email ever sent to askmoss.com was captured
 
 ### Conclusions
 
