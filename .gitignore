@@ -1,0 +1,30 @@
+# Service account keys - NEVER commit these
+service-account-key.json
+*.json
+!package.json
+
+# Environment files
+.env
+.env.*
+
+# Output files from script
+email_headers_*.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

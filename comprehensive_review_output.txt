@@ -1,0 +1,220 @@
+================================================================================
+COMPREHENSIVE BEC INVESTIGATION - EMAIL REVIEW
+Generated: 2025-12-16 19:45:17
+================================================================================
+
+======================================================================
+Scanning: lori.maynard@askmoss.com
+Query: from:ssdhvac.com after:2025/11/16
+======================================================================
+  Found 4 messages
+
+======================================================================
+Scanning: lori.maynard@askmoss.com
+Query: from:ssdhvca.com after:2025/11/16
+======================================================================
+  Found 8 messages
+
+======================================================================
+Scanning: lori.maynard@askmoss.com
+Query: to:ssdhvac.com after:2025/11/16
+======================================================================
+  Found 8 messages
+
+======================================================================
+Scanning: lori.maynard@askmoss.com
+Query: to:ssdhvca.com after:2025/11/16
+======================================================================
+  Found 8 messages
+
+======================================================================
+Scanning: madelin.martinez@askmoss.com
+Query: from:ssdhvac.com after:2025/11/16
+======================================================================
+  Found 13 messages
+
+======================================================================
+Scanning: madelin.martinez@askmoss.com
+Query: from:ssdhvca.com after:2025/11/16
+======================================================================
+  Found 3 messages
+
+======================================================================
+Scanning: madelin.martinez@askmoss.com
+Query: to:ssdhvac.com after:2025/11/16
+======================================================================
+  Found 15 messages
+
+======================================================================
+Scanning: madelin.martinez@askmoss.com
+Query: to:ssdhvca.com after:2025/11/16
+======================================================================
+  Found 7 messages
+
+================================================================================
+SUMMARY
+================================================================================
+
+Users Scanned: 2
+  - lori.maynard@askmoss.com
+  - madelin.martinez@askmoss.com
+
+Date Range: Last 30 days (since 2025/11/16)
+
+Total Unique Emails Analyzed: 52
+  - From ssdhvac.com: 17
+  - From ssdhvca.com: 11
+
+================================================================================
+ANOMALY DETECTION RESULTS
+================================================================================
+
+  [!] Found 11 emails with anomalies:
+
+  Date: Mon, 15 Dec 2025 14:13:45 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Fri, 12 Dec 2025 22:24:30 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Fri, 12 Dec 2025 22:11:13 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>, Madelin Martinez <m...
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Fri, 12 Dec 2025 21:56:41 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Fri, 12 Dec 2025 15:57:05 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Fri, 12 Dec 2025 15:41:41 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Wed, 10 Dec 2025 19:26:29 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Wed, 10 Dec 2025 18:13:27 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Tue, 9 Dec 2025 19:31:23 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Madelin Martinez <madelin.martinez@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Tue, 9 Dec 2025 19:06:34 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+  Date: Mon, 8 Dec 2025 16:26:20 +0000
+  From: Janet Halstead- Wiggins <jhalstead-wiggins@ssdhvca.com>
+  To: Lori Maynard <lori.maynard@askmoss.com>
+  Subject: Re: Moss Mechnical - Invoices
+  >>> DKIM MISMATCH: From=ssdhvca.com, DKIM=warehouseathletics.onmicrosoft.com
+  >>> !!! CRITICAL: DKIM signed by known attacker tenant !!!
+
+
+================================================================================
+REPLY-TO HEADER ANALYSIS - LEGITIMATE EMAILS
+================================================================================
+
+  Total legitimate emails from ssdhvac.com: 17
+  - With Reply-To header: 0
+  - Without Reply-To header: 17
+
+  ✓ CONFIRMED: All 17 legitimate emails have NO Reply-To header
+  ✓ NO REPLY-TO POISONING DETECTED
+
+================================================================================
+DETAILED EMAIL INVENTORY - LEGITIMATE DOMAIN
+================================================================================
+
+#   Date                       From                                     Reply-To     Subject                                 
+------------------------------------------------------------------------------------------------------------------------
+1   Tue, 9 Dec 2025 15:57:53   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  Re: invoices
+2   Tue, 9 Dec 2025 15:30:05   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  Re: invoices
+3   Tue, 25 Nov 2025 21:50:3   Janet Halstead-Wiggins <jhalstead-wigg   NOT PRESENT  Pre Lien Reminder  - 128659 (Moss Mech
+4   Thu, 4 Dec 2025 19:10:52   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  RE: No Pilates
+5   Mon, 8 Dec 2025 20:01:46   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  Re: invoices
+6   Mon, 8 Dec 2025 19:03:56   Janet Halstead-Wiggins <jhalstead-wigg   NOT PRESENT  RE:  125604 (Moss Mechanical LLC)*
+7   Mon, 8 Dec 2025 18:19:09   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  Re: invoices
+8   Mon, 8 Dec 2025 15:58:49   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  invoices
+9   Mon, 8 Dec 2025 15:14:38   David Barrios <dbarrios@ssdhvac.com>     NOT PRESENT  Invoices
+10  Mon, 15 Dec 2025 22:43:3   <postmaster@ssdhvac.com>                 NOT PRESENT  Undeliverable: Re: Moss Mechnical - In
+11  Mon, 15 Dec 2025 22:42:5   <postmaster@ssdhvac.com>                 NOT PRESENT  Undeliverable: Re: Moss Mechnical - In
+12  Mon, 15 Dec 2025 22:36:4   <postmaster@ssdhvac.com>                 NOT PRESENT  Undeliverable: Moss Mechanical Payment
+13  Mon, 15 Dec 2025 22:34:3   <postmaster@ssdhvac.com>                 NOT PRESENT  Undeliverable: Moss Mechanical Payment
+14  Mon, 15 Dec 2025 19:08:3   Janet Halstead-Wiggins <jhalstead-wigg   NOT PRESENT  RE: Moss Mechnical - Invoices
+15  Fri, 5 Dec 2025 22:05:10   Kim Lancaster <klancaster@ssdhvac.com>   NOT PRESENT  RE: Moss Mechnical - Invoices
+16  Fri, 5 Dec 2025 20:42:27   Janet Halstead-Wiggins <jhalstead-wigg   NOT PRESENT  Automatic reply: Moss Mechnical - Invo
+17  Fri, 21 Nov 2025 17:07:5   Janet Halstead-Wiggins <jhalstead-wigg   NOT PRESENT  RE: 125604 Moss Mechanical LLC
+
+================================================================================
+DETAILED EMAIL INVENTORY - FRAUDULENT DOMAIN
+================================================================================
+
+#   Date                       From                                     DKIM Domain                        
+--------------------------------------------------------------------------------------------------------------
+1   Wed, 10 Dec 2025 19:26:2   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+2   Wed, 10 Dec 2025 18:13:2   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+3   Tue, 9 Dec 2025 19:31:23   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+4   Tue, 9 Dec 2025 19:06:34   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+5   Mon, 8 Dec 2025 16:26:20   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+6   Mon, 15 Dec 2025 14:13:4   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+7   Fri, 12 Dec 2025 22:24:3   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+8   Fri, 12 Dec 2025 22:11:1   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+9   Fri, 12 Dec 2025 21:56:4   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+10  Fri, 12 Dec 2025 15:57:0   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+11  Fri, 12 Dec 2025 15:41:4   Janet Halstead- Wiggins <jhalstead-wig   warehouseathletics.onmicrosoft.com 
+
+================================================================================
+VERDICT
+================================================================================
+
+    ╔══════════════════════════════════════════════════════════════════════╗
+    ║  ✓  NO REPLY-TO POISONING DETECTED                                   ║
+    ║                                                                       ║
+    ║  All legitimate emails from Standard Supply have NO Reply-To header.  ║
+    ║  The attack did not involve modifying outgoing Standard Supply emails.║
+    ║                                                                       ║
+    ║  CONCLUSION: Moss Mechanical was NOT compromised.                     ║
+    ║  Attack vector: Read-access compromise at Standard Supply.            ║
+    ╚══════════════════════════════════════════════════════════════════════╝
+    
+
+Report complete. 52 unique emails analyzed across 2 users.
