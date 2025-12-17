@@ -71684,3 +71684,34 @@ Moss Heating & Cooling
 [instagram]<https://www.instagram.com/ask.moss/>
 
 
+
+============================================================
+ATTACHMENTS
+============================================================
+  - image.png (image/png, 8074 bytes)
+  - image.png (image/png, 8016 bytes)
+
+--------------------------------------------------------------------------------
+END OF EMAIL #208
+--------------------------------------------------------------------------------
+
+
+================================================================================
+EXPORT SUMMARY
+================================================================================
+Total unique emails exported: 208
+Users scanned: 2
+Domains searched: ssdhvac.com, ssdhvca.com
+
+By Location:
+  - INBOX: 95
+  - SENT: 82
+  - TRASH: 40
+  - SPAM: 1
+  - OTHER/ARCHIVE: 1
+
+By Domain:
+  - From ssdhvac.com (legitimate): 77
+  - From ssdhvca.com (FRAUDULENT): 27
+
+Export completed: 2025-12-16 20:00:49
