@@ -9,10 +9,11 @@ This guide walks you through setting up domain-wide delegation to access Gmail h
 2. Create a new project or select an existing one
 3. Note the **Project ID**
 
-### 1.2 Enable Gmail API
+### 1.2 Enable Required APIs
 1. Go to **APIs & Services** > **Library**
-2. Search for "Gmail API"
-3. Click **Enable**
+2. Search for and **Enable** each of these:
+   - **Gmail API** - for reading emails and settings
+   - **Admin SDK API** - for audit logs and user management
 
 ### 1.3 Create Service Account
 1. Go to **APIs & Services** > **Credentials**
@@ -50,11 +51,16 @@ You'll need this for the Admin Console setup.
 5. Enter:
    - **Client ID**: The numeric client ID from your service account
      (find this in Cloud Console > IAM > Service Accounts > click your account > copy the "Unique ID")
-   - **OAuth Scopes**:
+   - **OAuth Scopes** (comma-separated, all on one line):
      ```
-     https://www.googleapis.com/auth/gmail.readonly
+     https://www.googleapis.com/auth/gmail.readonly,https://www.googleapis.com/auth/gmail.settings.basic,https://www.googleapis.com/auth/admin.reports.audit.readonly
      ```
 6. Click **Authorize**
+
+**Scope breakdown:**
+- `gmail.readonly` - Read emails and headers
+- `gmail.settings.basic` - Check filters, forwarding, delegates
+- `admin.reports.audit.readonly` - Access audit logs (login, OAuth, etc.)
 
 ### Finding the Client ID
 1. In Google Cloud Console, go to **IAM & Admin** > **Service Accounts**

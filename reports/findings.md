@@ -891,4 +891,151 @@ A final comprehensive review was performed to verify all findings. All emails fr
 
 **Report Generated:** December 16, 2025
 **Analysis Tool:** Custom Gmail API forensic script with domain-wide delegation
-**Analyst:** [Your Name]
+**Analyst:** Robert Greiner, CTO
+
+---
+
+# ADDENDUM: December 23, 2025 - Revised Findings
+
+## Critical Update: Moss Account Compromise Discovered
+
+Following Standard Supply's DFIR report (which found no compromise in their environment), we conducted an audit of Moss Mechanical's Google Workspace environment. **We discovered evidence of unauthorized access to Lori Maynard's Gmail account on December 1, 2025.**
+
+### Revised Hypothesis Assessment
+
+| # | Hypothesis | Original Verdict (Dec 16) | **Revised Verdict (Dec 23)** |
+|---|------------|---------------------------|------------------------------|
+| 2 | Moss Compromise | ❌ REFUTED | **✅ CONFIRMED** |
+| 3 | Standard Supply Read-Access | ✅ CONFIRMED | **❓ UNCONFIRMED** (DFIR found no evidence) |
+
+### What Changed
+
+**Original Logic (Dec 16):**
+> If attacker had Lori's mailbox access, they could read her sent folder directly - no need for a lookalike domain to capture her replies.
+
+**Revised Understanding (Dec 23):**
+The attacker DID have Lori's mailbox access BUT still used lookalike domains because:
+1. **They didn't want to send emails FROM Lori's account** - would be detected
+2. **They wanted to impersonate the VENDOR, not Moss** - more effective for payment fraud
+3. **The lookalike domain let them intercept Lori's replies** - while also having mailbox visibility
+
+### Evidence of Lori's Account Compromise
+
+**December 1, 2025 - Three datacenter IP logins within 4 minutes:**
+
+| Time (UTC) | IP Address | Location | Provider |
+|------------|------------|----------|----------|
+| 19:05:00 | 172.120.137.37 | Secaucus, NJ | HOST TELECOM |
+| 19:06:18 | 45.87.125.150 | Los Angeles, CA | Clouvider |
+| 19:08:53 | 46.232.34.229 | New York City, NY | Clouvider |
+
+- All logins passed Google's login challenges (no 2FA was configured)
+- All authorized "Google Chrome" as a native client within 1 second
+- Lori confirmed she was not traveling and does not use VPN
+
+### Attacker Did NOT Send Emails as Lori
+
+Analysis of all 62 emails sent from Lori's account during Dec 1-17:
+- **No suspicious external recipients**
+- **No unusual content or requests**
+- **Attacker IPs not present in Gmail activity logs** (only in login logs)
+- **No email deletion events** during compromise window
+- **Writing style consistent** throughout - all genuine Lori correspondence
+
+**Conclusion:** Attacker used READ-ONLY access for intelligence gathering, not impersonation.
+
+### Attacker Domain Infrastructure
+
+All domains on **same Microsoft 365 tenant** (ID: `4b0f3443-6891-4079-a2a5-de733068808c`):
+
+| Domain | Registered | Purpose |
+|--------|------------|---------|
+| `ssdhvca.com` | Dec 4, 2025 | Impersonate Standard Supply |
+| `aksmoss.com` | Dec 5, 2025 | Typosquat of askmoss.com |
+| `sshdvac.com` | Dec 17, 2025 | Last-ditch attempt after remediation |
+| `warehouseathletics.onmicrosoft.com` | Base tenant | Attacker's M365 infrastructure |
+
+### Revised Attack Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    MOSS MECHANICAL (Compromised Dec 1)              │
+│                                                                     │
+│  Lori's Mailbox ──────────────────┐                                │
+│       │                           │                                │
+│       │ Attacker has READ access  │                                │
+│       ▼                           │                                │
+│  Reads email threads with         │                                │
+│  Standard Supply (Janet)          │                                │
+│  - Extracts Message-IDs           │                                │
+│  - Learns business context        │                                │
+│  - Identifies payment discussions │                                │
+└─────────────────────────────────────────────────────────────────────┘
+                    │
+                    │ Attacker extracts intelligence
+                    ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    ATTACKER INFRASTRUCTURE                          │
+│                                                                     │
+│  1. Registers ssdhvca.com (Dec 4) + aksmoss.com (Dec 5)            │
+│  2. Uses warehouseathletics M365 tenant                            │
+│  3. Crafts emails with valid In-Reply-To headers                   │
+│  4. Impersonates Janet from Standard Supply                        │
+└─────────────────────────────────────────────────────────────────────┘
+                    │
+                    │ Sends fraudulent emails
+                    ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    LORI AT MOSS (Double Victim)                     │
+│                                                                     │
+│  1. Account was compromised (attacker reading her inbox)           │
+│  2. Receives fraudulent emails from fake Janet                     │
+│  3. Replies go to ssdhvca.com (attacker-controlled)                │
+│  4. Attacker sees both sides of conversation                       │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Why Original Analysis Was Incomplete
+
+The Dec 16 analysis correctly identified:
+- The typosquat domain infrastructure
+- Thread injection via Message-IDs
+- Lack of Reply-To poisoning
+
+But it incorrectly concluded Standard Supply was the source because:
+1. We had not yet audited Moss's Google Workspace login logs
+2. The logic assumed mailbox access would eliminate need for lookalike domain
+3. We didn't consider that the attacker wanted to impersonate the VENDOR specifically
+
+### Remediation Completed
+
+| Date | Action | Status |
+|------|--------|--------|
+| Dec 17, 2025 | Password reset for Lori | ✅ Complete |
+| Dec 17, 2025 | 2FA enrollment for Lori | ✅ Complete |
+| Dec 17, 2025 | All sessions invalidated | ✅ Complete |
+| Dec 23, 2025 | Gmail settings verified clean | ✅ Complete |
+| Dec 23, 2025 | No unauthorized forwarding/filters | ✅ Verified |
+
+### Correlation with Standard Supply DFIR
+
+Standard Supply's DFIR found no evidence of compromise. **Our revised findings are consistent with theirs:**
+- The attacker did not need access to Standard Supply's systems
+- Lori's compromised mailbox provided full visibility into both sides of the conversation
+- Message-IDs were obtained from Lori's inbox, not Janet's
+
+### Systemic Issue: 2FA Adoption
+
+| Metric | Count | Risk |
+|--------|-------|------|
+| Active users | 89 | - |
+| With 2FA | 15 (17%) | - |
+| **WITHOUT 2FA** | **74 (83%)** | **HIGH** |
+
+The compromise was enabled by lack of 2FA. Immediate enforcement recommended.
+
+---
+
+**Addendum Author:** Robert Greiner, CTO
+**Addendum Date:** December 23, 2025
+**Status:** Investigation complete. Revised conclusions confirmed.
