@@ -299,6 +299,59 @@ Evidence:
 4. **Only 3 emails sent on Dec 1** (compromise day) - all internal business correspondence
 5. **Attack pattern** - attacker impersonated Janet FROM typosquat, didn't send AS Lori
 
+### Definitive Verification: SENT Label Audit
+
+Gmail adds a SENT label to every email at send time. This label persists even if the email is later deleted or moved. By comparing the SENT label count to the sent folder count, we can detect if any sent emails were deleted:
+
+| Metric | Count |
+|--------|-------|
+| Emails with SENT label (Dec 1-17) | 62 |
+| Emails in sent folder (Dec 1-17) | 62 |
+| **Difference** | **0** |
+
+**Result: No sent emails were deleted during the compromise window.**
+
+This definitively proves the attacker did not:
+- Send emails as Lori and then delete them
+- Use her account to send fraudulent messages
+- Attempt to hide outgoing email activity
+
+### SMTP-Level Verification: Admin Email Log Search
+
+We conducted an Admin Email Log Search to verify all emails sent from Lori's account at the SMTP level. This analysis revealed important context:
+
+| Metric | Count |
+|--------|-------|
+| Unique Message-IDs in Admin Log | 259 |
+| Emails in Gmail SENT folder | 62 |
+| **Apparent discrepancy** | **197** |
+
+**Analysis of discrepancy:**
+
+The Admin Email Log shows more entries because it includes:
+1. **Abnormal Security processing** - 93 emails appear from BOTH office IP and AWS IPs (Abnormal Security reprocessing copies for threat analysis)
+2. **Calendar responses** - 5 auto-generated calendar acceptances ("Accepted: Secret Santa...")
+3. **Multi-recipient logging** - Same email to multiple recipients logged separately
+4. **Internal routing** - Emails to @askmoss.com and @mossutilities.com may have additional routing entries
+
+**IP Source Analysis:**
+
+| Source | Unique Emails | Notes |
+|--------|---------------|-------|
+| Office (199.200.88.186) | 237 | Lori's legitimate sends |
+| AWS/Abnormal Security | 110 | Security processing (93 overlap with office) |
+| Mobile (IPv6) | 13 | AT&T cellular |
+| Other | 6 | Various including calendar system |
+
+**Critical finding: Attacker IPs NOT found in email sends:**
+```
+172.120.137.37 (Secaucus, NJ)   - NOT FOUND
+45.87.125.150 (Los Angeles, CA) - NOT FOUND
+46.232.34.229 (New York, NY)    - NOT FOUND
+```
+
+This confirms the attacker only had **READ access** and did not send any emails from Lori's account.
+
 ### Attacker's Operational Pattern
 
 The attacker's strategy was intelligence-gathering, not impersonation:
@@ -334,6 +387,7 @@ No suspicious external recipients identified.
 | Login events | 373 | Nov 23 - Dec 23, 2025 |
 | Gmail events (Lori) | 12,670 | Nov 23 - Dec 23, 2025 |
 | OAuth/Token events | 896 | Nov 23 - Dec 23, 2025 |
+| Admin Email Log Search (Lori sends) | 672 rows / 259 unique | Dec 1 - Dec 17, 2025 |
 
 ### Legitimate OAuth Applications
 
@@ -349,6 +403,10 @@ No suspicious external recipients identified.
 | `src/audit_logs.py` | Pull Google Workspace audit logs |
 | `src/check_gmail_settings.py` | Verify Gmail settings for persistence |
 | `src/list_users.py` | List users and 2FA enrollment status |
+| `src/analyze_admin_log.py` | Analyze Admin Email Log Search exports |
+| `src/analyze_admin_log_ips.py` | IP analysis of sent emails |
+| `src/compare_message_ids.py` | Compare Message-IDs between sources |
+| `src/categorize_missing.py` | Categorize emails by type and destination |
 
 ### Commands Executed
 

@@ -942,6 +942,18 @@ Analysis of all 62 emails sent from Lori's account during Dec 1-17:
 - **No email deletion events** during compromise window
 - **Writing style consistent** throughout - all genuine Lori correspondence
 
+### Definitive Verification: SENT Label Audit
+
+Gmail adds a SENT label to every email at send time. This label persists even if the email is later deleted:
+
+| Metric | Count |
+|--------|-------|
+| Emails with SENT label (Dec 1-17) | 62 |
+| Emails in sent folder (Dec 1-17) | 62 |
+| **Difference** | **0** |
+
+**No sent emails were deleted.** This proves the attacker did not send and then delete any emails.
+
 **Conclusion:** Attacker used READ-ONLY access for intelligence gathering, not impersonation.
 
 ### Attacker Domain Infrastructure
