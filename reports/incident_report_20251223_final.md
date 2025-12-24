@@ -474,6 +474,59 @@ python src/audit_logs.py --user invoices@askmoss.com --days 30
 
 ---
 
+## Additional Investigations
+
+### Password Reset Attack Analysis
+
+**Question:** Did the attacker attempt to take over other accounts by requesting password resets?
+
+**Finding:** No evidence of password reset attacks.
+
+| Date | Email Received | Assessment |
+|------|----------------|------------|
+| Dec 1, 11:36 AM | Guardian Life - "One-time verification code" | Before compromise (1:05 PM) - legitimate Lori |
+| Dec 2, 14:52 PM | link.com - "Verify your email" | Before attacker operations (Dec 4) - legitimate Lori |
+
+The attacker did not trigger any password reset emails for external systems during their operational window (Dec 4-15).
+
+### Pre-Compromise Security Alerts
+
+Google security alerts were received before the December 1 compromise:
+
+| Date | Alert | Significance |
+|------|-------|--------------|
+| Oct 29, 2025 | Google Security Alert | Unknown trigger - possible early reconnaissance |
+| Nov 9, 2025 | Google Security Alert | 3 weeks before compromise - possible failed attempts |
+
+These may indicate the attacker was testing access before the successful December 1 login. Further investigation would require Google Workspace audit logs from that period.
+
+### Texas Security Bank Monitoring
+
+The attacker specifically monitored banking-related emails:
+
+| Date | Activity |
+|------|----------|
+| Dec 4 | Viewed "Blanket Security Agreement" attachment |
+| Dec 5 | Viewed "Bank Rec" emails and attachments |
+| Dec 8 | Repeatedly viewed "Security Alert: Valid Password" emails |
+| Dec 10 | Viewed "New Bank Accounts" / "RE: New Bank Accounts" |
+| Dec 15 | Additional monitoring of bank security alerts |
+
+**Recommendation:** Contact Texas Security Bank to verify no unauthorized access and review login history.
+
+### Evidence Exports
+
+Key evidence has been exported to `output/evidence_exports/` for preservation:
+
+| File | Records | Content |
+|------|---------|---------|
+| `all_delete_events.csv` | 567 | All delete events in logs |
+| `attacker_ip_activity.csv` | 1,606 | All activity from attacker IPs |
+| `attacker_domain_activity.csv` | 915 | All emails to/from attacker domains |
+| `headers.csv` | 1 | CSV column headers for reference |
+
+---
+
 ## Conclusions
 
 1. **Root cause identified:** Lori Maynard's Google account was compromised on December 1, 2025, due to lack of 2FA protection.
@@ -498,7 +551,8 @@ python src/audit_logs.py --user invoices@askmoss.com --days 30
 
 ---
 
-**Report Status:** Final (Revised Dec 23, 2025 - Canadian VPS findings added)
+**Report Status:** Final (Revised Dec 23, 2025)
 **Next Review:** After 2FA enforcement implementation
 **Distribution:** Executive team, IT, Legal, Insurance (as needed)
-**Related:** [Addendum - Canadian VPS Operations](addendum_20251223_canadian_vps.md)
+**Evidence Archive:** `output/evidence_exports/`
+**Archived Reports:** `reports/archive/` (superseded documents)
