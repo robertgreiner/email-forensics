@@ -168,6 +168,39 @@ Attacker repeatedly viewed:
 
 ---
 
+## Key Finding: No Impersonation
+
+**The attacker did NOT impersonate Lori to commit fraud.**
+
+| Emails Sent From Attacker IPs | Count |
+|-------------------------------|-------|
+| To attacker-controlled domains | 4 |
+| To legitimate third parties | **0** |
+
+All emails sent from the attacker IPs went to their own typosquat domains for data exfiltration. The fraud was committed FROM the attacker's domains (impersonating Janet at Standard Supply), not FROM Lori's account.
+
+### What the Attacker Actually Did (1,606 events)
+
+| Activity | Count | % | Purpose |
+|----------|-------|---|---------|
+| View | 1,318 | 82.1% | Reading emails |
+| Open | 135 | 8.4% | Opening emails |
+| Attachment preview | 71 | 4.4% | Looking at attachments |
+| Draft | 16 | 1.0% | Composing exfiltration |
+| Mark unread | 16 | 1.0% | Hiding that they read emails |
+| Move to Inbox | 14 | 0.9% | Recovering emails |
+| Delete | 9 | 0.6% | Destroying evidence |
+| Move out of trash | 9 | 0.6% | Retrieving trashed emails |
+| Archive | 5 | 0.3% | Organizing |
+| Send | 4 | 0.2% | Exfiltration only |
+| Move to Trash | 4 | 0.2% | Staging for delete |
+| Link click | 4 | 0.2% | Clicked links in emails |
+| Reply | 1 | 0.1% | Part of exfiltration |
+
+**Summary:** ~95% surveillance (read/view), ~5% housekeeping and exfiltration
+
+---
+
 ## Recommendations
 
 1. **Block all 5 attacker IPs** at firewall level
@@ -178,11 +211,25 @@ Attacker repeatedly viewed:
 
 ---
 
+## Confidence Level
+
+**HIGH confidence in 5 attacker IPs.**
+
+Validation performed:
+1. ✅ All IPs with Delete events checked → only attacker IPs
+2. ✅ All IPs that sent to attacker domains checked → only attacker IPs
+3. ✅ All unknown IPs with December activity investigated → AT&T mobile or AWS/Abnormal Security
+4. ✅ Behavior-based analysis (not just volume-based)
+
+---
+
 ## Analysis Scripts
 
 | Script | Purpose |
 |--------|---------|
 | `src/comprehensive_ip_audit.py` | Behavior-based IP analysis |
+| `src/validate_findings.py` | Validate attacker IP coverage |
+| `src/check_attacker_sends.py` | Check for impersonation vs exfiltration |
 | `src/attacker_timeline.py` | Canadian VPS activity timeline |
 | `src/investigate_147.py` | Tier.Net IP investigation |
 | `src/analyze_lori_all.py` | Full event log analysis |

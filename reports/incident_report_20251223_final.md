@@ -314,27 +314,35 @@ This proves all domains were controlled by the same threat actor.
 
 ### Did the Attacker Send Emails as Lori?
 
-**REVISED CONCLUSION: YES - attacker conducted active operations**
+**REVISED CONCLUSION: YES - attacker conducted active operations, but did NOT impersonate Lori**
 
-**See: [Addendum - Canadian VPS Operations](addendum_20251223_canadian_vps.md) for full details**
+**See: [Complete Attacker IP Inventory](all_attacker_ips.md) for full details**
 
-A fourth attacker IP was discovered: **158.51.123.14** (GLOBALTELEHOST Corp, Canada)
+Two operational attacker IPs were discovered beyond the initial login IPs:
+- **147.124.205.9** (Tier.Net Technologies) - Dec 4 only, 74 events
+- **158.51.123.14** (GLOBALTELEHOST Corp, Canada) - Dec 4-15, 1,532 events
 
 | Metric | Finding |
 |--------|---------|
 | Active period | December 4-15, 2025 (12 days) |
-| Total events | 1,532 |
-| Emails viewed | 1,267 |
-| **Emails sent to attacker domains** | **2** |
-| **Emails permanently deleted** | **7** |
+| Total events from attacker IPs | 1,606 |
+| Emails viewed | 1,318 (82%) |
+| Attachments previewed | 71 (4%) |
+| **Emails sent to attacker domains** | **4** |
+| **Emails sent to third parties** | **0** |
+| **Emails permanently deleted** | **9** |
 
-**Confirmed Exfiltration:**
-1. **Dec 10, 12:05 CST** - Email sent to `jhalstead-wiggins@ssdhvca.com` (attacker domain)
-2. **Dec 15, 07:40 CST** - "Re: Cintas Invoices/Payments" sent to `lori.maynard@aksmoss.com`
+**Confirmed Exfiltration (all to attacker-controlled domains):**
+1. **Dec 4, 09:11 CST** - To `jhalstead-wiggins@ssdhvca.com` (deleted)
+2. **Dec 4, 09:17 CST** - To `jhalstead-wiggins@ssdhvca.com` (deleted)
+3. **Dec 10, 12:05 CST** - To `jhalstead-wiggins@ssdhvca.com` (deleted)
+4. **Dec 15, 07:40 CST** - To `lori.maynard@aksmoss.com` - Cintas invoice data (deleted)
 
-Both emails were **deleted within seconds** to destroy evidence.
+**Critical Finding: NO IMPERSONATION**
 
-Initial conclusion was wrong because we searched for the Dec 1 login IPs in email activity. The attacker used a **different IP** for sustained operations, leveraging the OAuth token obtained during initial compromise.
+The attacker did NOT send any emails to legitimate third parties as Lori. All 4 emails sent from attacker IPs went to attacker-controlled domains. This was purely an **intelligence gathering and data exfiltration** operation - the fraud was committed FROM the attacker's typosquat domains, not FROM Lori's account.
+
+Initial conclusion was wrong because we searched for the Dec 1 login IPs in email activity. The attacker used **different IPs** for sustained operations, leveraging the OAuth token obtained during initial compromise.
 
 ### SENT Folder Analysis (Revised)
 
@@ -443,6 +451,10 @@ The comprehensive event log (lori-all.csv) was critical in discovering the Canad
 | `src/analyze_lori_all.py` | Comprehensive Gmail event analysis (lori-all.csv) |
 | `src/deep_dive_suspicious.py` | Deep dive into suspicious IP activity |
 | `src/attacker_timeline.py` | Build attacker activity timeline from Canadian VPS |
+| `src/comprehensive_ip_audit.py` | Behavior-based IP analysis (finds low-volume attackers) |
+| `src/validate_findings.py` | Validate attacker IP coverage |
+| `src/check_attacker_sends.py` | Confirm no impersonation (exfiltration only) |
+| `src/investigate_147.py` | Tier.Net IP (147.124.205.9) investigation |
 
 ### Commands Executed
 
@@ -466,19 +478,23 @@ python src/audit_logs.py --user invoices@askmoss.com --days 30
 
 1. **Root cause identified:** Lori Maynard's Google account was compromised on December 1, 2025, due to lack of 2FA protection.
 
-2. **Attack was more extensive than initially believed:** Attacker maintained active access for 12 days (Dec 4-15), viewed 1,267 emails, sent 2 exfiltration emails to attacker domains, and permanently deleted 7 emails to cover tracks.
+2. **Attack was more extensive than initially believed:** Attacker used 5 different IPs, maintained active access for 12 days (Dec 4-15), executed 1,606 events, viewed 1,318 emails, sent 4 exfiltration emails to attacker domains, and permanently deleted 9 emails to cover tracks.
 
-3. **Data exfiltration confirmed:** At minimum, Cintas invoice data was sent to attacker-controlled domain. Additional data may have been exfiltrated via the blank-subject email to ssdhvca.com.
+3. **No impersonation occurred:** The attacker did NOT send emails to legitimate third parties as Lori. All emails from attacker IPs went to attacker-controlled domains. This was purely intelligence gathering and data theft - the fraud was committed FROM the attacker's typosquat domains.
 
-4. **Scope contained:** No other Moss accounts were accessed by the attacker. The compromise was limited to Lori's account.
+4. **Data exfiltration confirmed:** Standard Supply invoice thread data ($300,600.82 ACH payment) and Cintas invoice data were sent to attacker-controlled domains.
 
-5. **Remediation complete:** Password reset, 2FA enrolled, and account verified clean as of December 23, 2025.
+5. **Scope contained:** No other Moss accounts were accessed by the attacker. The compromise was limited to Lori's account.
 
-6. **Systemic risk remains:** 83% of users lack 2FA, leaving the organization vulnerable to similar attacks.
+6. **Remediation complete:** Password reset, 2FA enrolled, and account verified clean as of December 23, 2025.
 
-7. **Standard Supply findings validated:** Their DFIR conclusion of "no compromise" is consistent with our analysis. The attack originated from the Moss side.
+7. **Systemic risk remains:** 83% of users lack 2FA, leaving the organization vulnerable to similar attacks.
 
-8. **Additional vendor risk:** Cintas should be notified that their invoice data may have been compromised and to watch for BEC attempts.
+8. **Standard Supply findings validated:** Their DFIR conclusion of "no compromise" is consistent with our analysis. The attack originated from the Moss side.
+
+9. **Additional vendor risk:** Cintas should be notified that their invoice data may have been compromised and to watch for BEC attempts.
+
+10. **Banking concern:** Attacker repeatedly viewed Texas Security Bank login alerts - bank should be contacted to verify no unauthorized access.
 
 ---
 
