@@ -67,6 +67,7 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 | **Abnormal.ai** | Active (Nov 2025) | Email security, BEC detection |
 | **Contraforce** | Starting Jan 2026 | Security monitoring, SOC |
 | **1Password Business** | Q1 2026 | Password management |
+| **Asset Panda** | Active | Hardware/software asset inventory |
 
 ### Partners
 
@@ -418,6 +419,44 @@ December incidents revealed gaps. This assessment provides a structured framewor
 
 ---
 
+### 10. Asset Inventory (Asset Panda)
+
+**Priority:** 🟡 Medium
+**Owner:** Moss IT
+**Tool:** Asset Panda
+**Timeline:** Ongoing (Q1 verification)
+
+**Objective:** Maintain comprehensive inventory of hardware and software assets
+
+**Why This Matters for Security:**
+You can't protect what you don't know you have. Asset inventory is foundational to security:
+
+- **Incident Response:** When a compromise occurs, you need to know what devices/software the user has access to
+- **Vulnerability Management:** Can't patch systems you don't know exist
+- **Access Control:** Can't enforce policies on unknown devices
+- **Offboarding:** When employees leave, you need to know what to recover
+- **License Compliance:** Unauthorized software can introduce risk
+
+**CIS Controls Alignment:**
+- Control 1: Inventory and Control of Enterprise Assets (hardware)
+- Control 2: Inventory and Control of Software Assets
+
+**Current State:** Asset Panda deployed
+
+**Q1 Actions:**
+- [ ] Verify asset inventory is current
+- [ ] Confirm all user devices are tracked
+- [ ] Review software inventory for unauthorized applications
+- [ ] Establish process for new device/software registration
+- [ ] Integrate asset data into incident response procedures
+
+**Success Metrics:**
+- 100% of company devices inventoried
+- Software inventory current
+- Process documented for new assets
+
+---
+
 ## Q1 2026 Timeline
 
 ```
@@ -500,6 +539,7 @@ MARCH 2026
 | Incident Response Playbook | Complete |
 | Payment Policy | Team trained and vigilant |
 | CIS IG1 Assessment | Complete with roadmap |
+| Asset Inventory | Verified current |
 
 ---
 
