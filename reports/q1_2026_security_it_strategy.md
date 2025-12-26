@@ -31,6 +31,22 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 **Root Cause:** Both accounts lacked two-factor authentication. Password-only authentication allowed attackers to gain access using compromised credentials.
 
+### Key Insight: Sophisticated Attackers, Basic Entry Point
+
+**The attack pattern:**
+- **Entry:** Basic and unsophisticated - compromised passwords, walked in the front door
+- **Post-Access:** Highly sophisticated and intelligent once inside
+
+**Sophisticated Tactics Used (After Access):**
+- Waited 3-5 days before taking action (patience, reconnaissance)
+- Set up email filters to hide responses from targets
+- Registered lookalike domains for BEC emails
+- Targeted specific finance employees by name
+- Crafted contextually relevant payment requests
+- Deleted sent emails to cover tracks
+
+**The Lesson:** We don't need to defend against sophisticated initial attacks. A basic control (MFA) would have stopped both incidents completely. The attackers didn't hack their way in - they simply used stolen passwords against accounts with no second factor.
+
 **What Saved Us:**
 - Employee vigilance (Christina flagged suspicious email)
 - Vendor verification (Standard Supply called to verify $300K payment request)
@@ -105,7 +121,38 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ---
 
-### 2. 1Password Business Deployment
+### 2. Payment Verification Policy Confirmation
+
+**Priority:** 🔴 Critical
+**Owner:** Finance (Sean)
+**Support:** Robert Greiner
+**Timeline:** January 2026
+
+**Objective:** Confirm existing payment verification policy is understood and actively followed
+
+**Current State:** Policy exists and is in place. This policy is what prevented the $300K loss during the December incident when Standard Supply called to verify the payment request.
+
+**Actions:**
+- [ ] Confirm policy documentation is current
+- [ ] Brief finance team on December incident (real-world example)
+- [ ] Verify all team members understand verification procedures
+- [ ] Include in security awareness training as reinforcement
+- [ ] Test with simulated payment change request (optional)
+
+**Policy Elements (Existing):**
+- Phone callback required for any banking changes
+- Dual approval for payments over threshold
+- No payment changes via email alone
+- Vendor contact info verified independently (not from email)
+
+**Success Metrics:**
+- 100% finance team acknowledges policy
+- December incident used as training example
+- Continued zero payments without verification
+
+---
+
+### 3. 1Password Business Deployment
 
 **Priority:** 🔴 Critical
 **Owner:** Kinetic Technology Group
@@ -142,7 +189,7 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ---
 
-### 3. Contraforce Security Monitoring
+### 4. Contraforce Security Monitoring
 
 **Priority:** 🟠 High
 **Owner:** Contraforce
@@ -173,34 +220,56 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ---
 
-### 4. Abnormal.ai Optimization
+### 5. Abnormal.ai Optimization + Login Monitoring
 
 **Priority:** 🟠 High
 **Owner:** Alchemy Security
 **Timeline:** January 2026
 
-**Objective:** Maximize BEC detection effectiveness
+**Objective:** Maximize BEC detection and establish centralized login monitoring
 
 **Current State:** Deployed November 2025, learning period ongoing
 
+#### BEC Detection
 **Actions:**
 - Review detection tuning after 60 days of baseline
 - Enable account takeover detection
 - Configure VIP protection for executives
 - Integrate alerting with Contraforce
 
-**Question for Alchemy:**
+#### Login Monitoring (Single Pane of Glass)
+
+**Objective:** Centralized view of login anomalies to catch compromises early
+
+**Abnormal Account Takeover Protection** provides:
+- Unusual geolocation alerts
+- Impossible travel detection (login from TX, then Europe 10 mins later)
+- Datacenter/VPS IP detection (attacker infrastructure)
+- New device fingerprint alerts
+
+**Actions:**
+- [ ] Confirm Account Takeover Protection is enabled
+- [ ] Verify alert destinations (email, dashboard, Slack?)
+- [ ] Define escalation path when alerts fire
+- [ ] Establish daily/weekly dashboard review cadence
+- [ ] Integrate with Contraforce monitoring in January
+
+**Questions for Alchemy:**
+- Is Account Takeover Protection fully configured?
 - Would Abnormal have detected the December attacks?
 - What tuning is needed for BEC patterns we saw?
+- Where should login alerts route to?
 
 **Success Metrics:**
 - BEC detection rate
+- Account takeover detection enabled
 - False positive rate <5%
-- Alert-to-response time
+- Alert-to-response time <1 hour
+- Daily dashboard review established
 
 ---
 
-### 5. Security Awareness Training
+### 6. Security Awareness Training
 
 **Priority:** 🟠 High
 **Owner:** Kinetic Technology Group
@@ -237,10 +306,10 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ---
 
-### 6. Google Drive Migration
+### 7. Google Drive Migration
 
 **Priority:** 🟠 High
-**Owner:** Kinetic Technology Group
+**Owner:** Moss IT
 **Timeline:** Q1 2026
 
 **Objective:** Consolidate file storage on Google Drive, retire Dropbox and SharePoint
@@ -278,7 +347,7 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ---
 
-### 7. Incident Response Planning
+### 8. Incident Response Planning
 
 **Priority:** 🟡 Medium
 **Owner:** Alchemy Security
@@ -309,29 +378,43 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ---
 
-### 8. Payment Verification Policy
+### 9. CIS Controls Gap Assessment
 
 **Priority:** 🟡 Medium
-**Owner:** Finance (Sean)
-**Support:** Alchemy Security
-**Timeline:** January 2026
+**Owner:** Alchemy Security
+**Timeline:** Q1 2026 (February-March)
 
-**Objective:** Formalize payment verification procedures that saved us from $300K loss
+**Objective:** Assess current security posture against CIS Controls v8 (IG1) and create remediation roadmap
 
-**Policy Elements:**
-- Phone callback required for any banking changes
-- Dual approval for payments over $X threshold
-- No payment changes via email alone
-- Vendor contact info verified independently (not from email)
+**What Are CIS Controls?**
+Industry-standard prioritized security best practices. Implementation Group 1 (IG1) represents essential cyber hygiene for all organizations.
 
-**Training:**
-- Finance team briefing
-- Include in security awareness training
+**Scope:** Assess against IG1 safeguards (56 controls), including:
+- Asset inventory (hardware, software)
+- Data protection
+- Secure configuration
+- Account/access management
+- Vulnerability management
+- Audit log management
+- Email protections
+- Malware defenses
+- Data recovery
+- Security awareness
+
+**Deliverables:**
+- Current state assessment
+- Gap analysis report
+- Prioritized remediation roadmap
+- Q2-Q4 security improvement plan
+
+**Why Now:**
+December incidents revealed gaps. This assessment provides a structured framework to identify what else we may be missing and prioritize future investments.
 
 **Success Metrics:**
-- Policy documented and signed
-- 100% finance team trained
-- Zero payments without verification
+- Assessment complete
+- Gaps documented with severity ratings
+- Remediation roadmap approved
+- Q2 priorities identified
 
 ---
 
@@ -340,25 +423,28 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 ```
 JANUARY 2026
 ├── Week 1: MFA for Finance + Executives
+├── Week 1: Payment Verification Policy Confirmation (Finance Team)
 ├── Week 1: 1Password Pilot (IT, Finance)
 ├── Week 2: Contraforce Go-Live
 ├── Week 2: Phishing Simulation Baseline
+├── Week 2: Abnormal Login Monitoring Review with Alchemy
 ├── Week 3: MFA Enforcement (grace period)
 ├── Week 3: 1Password Full Rollout
 ├── Week 4: MFA Full Enforcement
-└── Week 4: Abnormal Review with Alchemy
+└── Week 4: Google Drive Migration Assessment
 
 FEBRUARY 2026
 ├── Week 1: Security Awareness Training
 ├── Week 2: Google Drive Migration (Full)
 ├── Week 3: Incident Response Playbook
-└── Week 4: Payment Verification Policy
+└── Week 4: Q1 Checkpoint Review
 
 MARCH 2026
 ├── Week 1: Phishing Simulation Follow-up
 ├── Week 2: Dropbox/SharePoint Decommission
+├── Week 2: CIS Controls Gap Assessment (Alchemy)
 ├── Week 3: Q1 Security Review
-└── Week 4: Q2 Planning
+└── Week 4: Q2 Planning (informed by CIS assessment)
 ```
 
 ---
@@ -412,7 +498,8 @@ MARCH 2026
 | Training Completion | 95% |
 | Google Drive Migration | 100% |
 | Incident Response Playbook | Complete |
-| Payment Policy | Documented and trained |
+| Payment Policy | Team trained and vigilant |
+| CIS IG1 Assessment | Complete with roadmap |
 
 ---
 
