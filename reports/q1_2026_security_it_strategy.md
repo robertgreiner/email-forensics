@@ -61,13 +61,33 @@ Two coordinated BEC attacks targeted Moss portfolio companies on consecutive day
 
 ## Security Stack
 
-| Tool | Status | Function |
-|------|--------|----------|
-| **Google Workspace** | Active | Identity, email, collaboration |
-| **Abnormal.ai** | Active (Nov 2025) | Email security, BEC detection |
-| **Contraforce** | Starting Jan 2026 | Security monitoring, SOC |
-| **1Password Business** | Q1 2026 | Password management |
-| **Asset Panda** | Active | Hardware/software asset inventory |
+| Tool | Status | Function | CIS Controls |
+|------|--------|----------|--------------|
+| **Google Workspace** | Active | Identity, email, collaboration | 5, 6 |
+| **Abnormal.ai** | Active (Nov 2025) | Email security, BEC detection | 9 |
+| **Contraforce** | Starting Jan 2026 | Security monitoring, SOC | 8 |
+| **1Password Business** | Q1 2026 | Password management | 5, 6 |
+| **Asset Panda** | Active | Hardware/software asset inventory | 1, 2 |
+| **Endpoint Protection (KineticTG)** | Active | Antivirus, monitoring, patching | 7, 10 |
+
+### CIS Controls Coverage (Current State)
+
+| CIS Control | Description | Coverage | Tool/Initiative |
+|-------------|-------------|----------|-----------------|
+| 1 | Asset Inventory (Hardware) | ✅ Covered | Asset Panda |
+| 2 | Asset Inventory (Software) | ✅ Covered | Asset Panda |
+| 3 | Data Protection | 🟡 Partial | Google Drive migration |
+| 4 | Secure Configuration | ❓ Unknown | Assess with Alchemy |
+| 5 | Account Management | 🟡 Partial | MFA + 1Password |
+| 6 | Access Control | 🟡 Partial | MFA + 1Password |
+| 7 | Vulnerability Management | ✅ Covered | KineticTG endpoint mgmt |
+| 8 | Audit Log Management | ✅ Covered | Contraforce + Abnormal |
+| 9 | Email & Browser Protection | ✅ Covered | Abnormal.ai |
+| 10 | Malware Defenses | ✅ Covered | KineticTG antivirus |
+| 11 | Data Recovery | ❓ Unknown | Assess with Alchemy |
+| 14 | Security Awareness | 🟡 In Progress | Q1 training initiative |
+
+**Legend:** ✅ Covered | 🟡 Partial/In Progress | ❓ Needs Assessment
 
 ### Partners
 
