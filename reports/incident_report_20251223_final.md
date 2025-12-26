@@ -117,7 +117,7 @@ Searched all login and activity events for attacker IPs:
 
 No evidence of lateral movement or additional account compromise. Both operational IPs only appear in Lori's Gmail activity logs.
 
-**See: [Complete Attacker IP Inventory](all_attacker_ips.md) for full analysis.**
+**See: [Complete Attacker IP Inventory](archive/all_attacker_ips.md) for full analysis.**
 
 ### Individual Account Audit
 
@@ -316,7 +316,7 @@ This proves all domains were controlled by the same threat actor.
 
 **REVISED CONCLUSION: YES - attacker conducted active operations, but did NOT impersonate Lori**
 
-**See: [Complete Attacker IP Inventory](all_attacker_ips.md) for full details**
+**See: [Complete Attacker IP Inventory](archive/all_attacker_ips.md) for full details**
 
 Two operational attacker IPs were discovered beyond the initial login IPs:
 - **147.124.205.9** (Tier.Net Technologies) - Dec 4 only, 74 events

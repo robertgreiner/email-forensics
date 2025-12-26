@@ -309,12 +309,9 @@ The attacker is now locked out.
 | Script | Purpose |
 |--------|---------|
 | `src/mossutilities/scan_all_logins.py` | Comprehensive user audit |
-| `src/mossutilities/audit_vaughn.py` | Deep audit of Vaughn's account |
-| `src/mossutilities/audit_vaughn_focused.py` | Attack window analysis |
-| `src/mossutilities/check_vaughn_persistence.py` | Check for attacker persistence |
-| `src/mossutilities/check_filtered_emails.py` | Delete malicious filter |
-| `src/mossutilities/analyze_vaughn_export.py` | Analyze email activity export |
-| `src/mossutilities/check_remediation.py` | Verify remediation effectiveness |
+| `src/mossutilities/comprehensive_security_audit.py` | Multi-factor security check |
+
+*Note: Incident-specific scripts archived to `src/mossutilities/archive/` after investigation complete.*
 
 ### Evidence Files
 
